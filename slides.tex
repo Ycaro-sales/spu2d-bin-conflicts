@@ -4,8 +4,10 @@
 \usepackage[brazil]{babel}
 \usepackage{lmodern}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\graphicspath{{figures/}{solutions/}}
 
 \usetheme{Madrid}
 \usecolortheme{whale}
@@ -156,21 +158,25 @@
 % ====================================================================
 \section{Heurísticas utilizadas}
 
-\begin{frame}{Heurística gulosa: First-Fit-Decreasing (linha de base)}
+\begin{frame}{Heurística gulosa: coloração + First-Fit-Decreasing}
+  \textbf{Novidade:} a gulosa agora \textbf{colore o grafo de conflitos} antes de
+  empacotar.
   \begin{enumerate}
-    \item Ordena os itens por \textbf{área decrescente};
-    \item Insere cada item por \textbf{First-Fit} nas faixas abertas;
-    \item Abre uma nova faixa quando nenhuma aberta aceita o item.
+    \item \textbf{Colore} $G$ por um algoritmo guloso (ordem de Welsh--Powell:
+          maior grau primeiro). Itens em conflito recebem cores diferentes
+          $\Rightarrow$ cada \textbf{classe de cor é um conjunto livre de
+          conflitos} (independente);
+    \item \textbf{Agrupa} os itens por cor;
+    \item Para \emph{cada cor}, ordena seus itens por \textbf{área decrescente} e
+          os empacota por \textbf{First-Fit} em \textbf{faixas dedicadas àquela
+          cor}, abrindo nova faixa quando os itens não cabem.
   \end{enumerate}
-  \vspace{0.5em}
-  \begin{block}{Detalhes geométricos}
-    \begin{itemize}
-      \item Inserção \textbf{ciente de conflitos} (rejeita item se um vizinho em
-            $G$ já está na faixa) e com \textbf{auto-rotação}.
-      \item Posicionamento via \textbf{Espaços Máximos Vazios} (EMS): o espaço
-            livre é um conjunto de retângulos vazios maximais, recortados a cada
-            inserção (regra \textit{bottom-left}).
-    \end{itemize}
+  \vspace{0.3em}
+  \begin{block}{Por que colorir?}
+    Faixas \textbf{nunca misturam cores} $\Rightarrow$ os conflitos tornam-se
+    impossíveis \emph{por construção}, em vez de depender da checagem a cada
+    inserção. Geometria por EMS, regra \textit{bottom-left} e auto-rotação
+    permanecem.
   \end{block}
 \end{frame}
 
@@ -217,37 +223,88 @@
 % ====================================================================
 \section{Resultados}
 
-\begin{frame}{Resultados: gulosa vs. BRKGA (18 instâncias)}
+\begin{frame}{Resultados: gulosa vs. BRKGA (60 instâncias)}
   \centering
+  60 instâncias amostradas dos três conjuntos (\textit{CJCM08},
+  \textit{BPP-Subproblems}, \textit{InterestingInstances}), $n$ de 10 a 27.
+  \vspace{0.5em}
+
   \begin{tabular}{lrrr}
     \toprule
     Instância & $n$ & Gulosa & BRKGA \\
     \midrule
-    CJCM-E02N20\_Hard\_c0.3           & 20 & 6 & \textbf{4} \\
-    CJCM-E00N23\_HardInfeasible\_c0.5 & 23 & 8 & \textbf{6} \\
-    CJCM-E03X18\_HardFeasible\_c0.1   & 18 & 3 & \textbf{2} \\
+    E00N15\_c0.3            & 15 & 4 & \textbf{3} \\
+    BPP n22\_c0.5           & 22 & 7 & \textbf{6} \\
+    BPP n26\_c0.5           & 26 & 8 & \textbf{6} \\
     \midrule
-    \textbf{Total (18 instâncias)}    &    & \textbf{91} & \textbf{78} \\
+    \textbf{Total (60 instâncias)} & & \textbf{293} & \textbf{262} \\
     \bottomrule
   \end{tabular}
-  \vspace{0.8em}
+  \vspace{0.6em}
   \begin{itemize}
-    \item BRKGA: \textbf{melhor em 11}, empate em 7, \textbf{nunca pior}.
-    \item Redução média de $\approx \mathbf{14{,}3\%}$ no número de faixas.
-    \item Tempos: gulosa $<0{,}01$\,s; BRKGA $\approx 0{,}07$--$0{,}13$\,s por
-          instância.
+    \item BRKGA: \textbf{melhor em 30}, empate em 30, \textbf{nunca pior}.
+    \item \textbf{31 faixas economizadas} no total --- redução de
+          $\approx \mathbf{10{,}6\%}$.
+    \item Tempos: gulosa $<0{,}001$\,s; BRKGA $\approx 0{,}10$\,s por
+          instância (máx.\ $0{,}18$\,s).
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Efeito da densidade de conflitos}
-  \begin{itemize}
-    \item Os sufixos \texttt{c0.1}, \texttt{c0.3}, \texttt{c0.5} indicam a
-          probabilidade de conflito entre pares de itens.
-    \item Mais conflitos $\Rightarrow$ menos itens podem dividir um recipiente
-          $\Rightarrow$ \textbf{mais faixas necessárias}.
-    \item É justamente nos cenários mais restritos que o BRKGA mais se distancia
-          da heurística gulosa --- evidenciando o valor da busca metaheurística.
-  \end{itemize}
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}
+        \item Os sufixos \texttt{c0.1}, \texttt{c0.3}, \texttt{c0.5} indicam a
+              probabilidade de conflito entre pares de itens.
+        \item Mais conflitos $\Rightarrow$ menos itens podem dividir um
+              recipiente $\Rightarrow$ \textbf{mais faixas necessárias}.
+        \item É nos cenários mais restritos (\texttt{c0.5}) que o BRKGA mais se
+              distancia da gulosa --- evidenciando o valor da busca.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \footnotesize Faixas (soma sobre 20 instâncias por densidade):
+      \vspace{0.3em}
+      \begin{tabular}{lrrr}
+        \toprule
+        Densidade & Gulosa & BRKGA & Econ. \\
+        \midrule
+        \texttt{c0.1} & 64  & 58  & 6  \\
+        \texttt{c0.3} & 93  & 85  & 8  \\
+        \texttt{c0.5} & 136 & 119 & \textbf{17} \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Exemplo de solução: gulosa vs. BRKGA}
+  \centering
+  \footnotesize Instância \texttt{E00N15\_c0.3} --- 15 itens, 35 conflitos. Mesmo
+  grafo de conflitos; o que muda é o empacotamento.
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \centering
+      \textbf{Gulosa: 4 faixas}\\[0.2em]
+      \includegraphics[height=0.72\textheight]{sample_greedy.png}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \textbf{BRKGA: 3 faixas}\\[0.2em]
+      \includegraphics[height=0.72\textheight]{sample_brkga.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Qualidade: faixas usadas (gulosa vs. BRKGA)}
+  \centering
+  \includegraphics[width=0.92\textwidth]{comparison_quality.png}
+  \vspace{0.2em}
+
+  \footnotesize Cada ponto é uma instância; abaixo da reta $y=x$, o BRKGA usa
+  menos faixas. À direita, a distribuição de faixas economizadas.
 \end{frame}
 
 % ====================================================================
@@ -257,14 +314,15 @@
   \begin{block}{Conclusão}
     Combinando representação por chaves aleatórias (BRKGA), decodificador
     First-Fit ciente de conflitos e gestão de espaços livres por EMS, obtivemos
-    soluções consistentemente melhores que a heurística gulosa, sem nunca
-    piorar nenhuma instância.
+    soluções consistentemente melhores que a gulosa (linha de base agora baseada
+    em \textbf{coloração} do grafo de conflitos): em 60 instâncias dos três
+    conjuntos, \textbf{30 vitórias, 30 empates e nenhuma derrota}.
   \end{block}
   \begin{block}{Trabalhos futuros}
     \begin{itemize}
       \item Incorporar a restrição de \textbf{descarregamento} por classe de
             cliente;
-      \item Avaliar sobre um conjunto maior de instâncias;
+      \item Ampliar a avaliação para todo o acervo de instâncias;
       \item Ajuste sistemático dos parâmetros da metaheurística.
     \end{itemize}
   \end{block}

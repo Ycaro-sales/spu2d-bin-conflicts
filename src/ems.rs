@@ -1,10 +1,10 @@
-#[derive(Eq, PartialEq, Hash, Clone, Copy)]
+#[derive(Eq, PartialEq, Hash, Clone, Copy, Debug)]
 pub struct Point {
     pub x: u32,
     pub y: u32,
 }
 
-#[derive(PartialEq, Eq, Hash, Clone)]
+#[derive(PartialEq, Eq, Hash, Clone, Debug)]
 pub struct Ems {
     pub min: Point,
     pub max: Point,
@@ -18,7 +18,7 @@ impl Ems {
         self.max.x - self.min.x
     }
     pub fn height(&self) -> u32 {
-        self.max.x - self.min.x
+        self.max.y - self.min.y
     }
     pub fn fits(&self, w: u32, h: u32) -> bool {
         self.width() >= w && self.height() >= h

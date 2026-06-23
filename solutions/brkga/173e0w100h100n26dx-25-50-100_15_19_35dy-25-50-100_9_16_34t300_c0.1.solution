@@ -1,0 +1,230 @@
+{
+  "bin_width": 100,
+  "bin_height": 100,
+  "num_items": 26,
+  "bins_used": 3,
+  "unplaced": [],
+  "runtime_seconds": 0.133507949,
+  "bins": [
+    {
+      "items": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 28,
+          "height": 33,
+          "rotated": true
+        },
+        {
+          "index": 1,
+          "x": 28,
+          "y": 0,
+          "width": 23,
+          "height": 33,
+          "rotated": true
+        },
+        {
+          "index": 2,
+          "x": 30,
+          "y": 33,
+          "width": 27,
+          "height": 28,
+          "rotated": false
+        },
+        {
+          "index": 7,
+          "x": 0,
+          "y": 50,
+          "width": 29,
+          "height": 19,
+          "rotated": true
+        },
+        {
+          "index": 9,
+          "x": 0,
+          "y": 33,
+          "width": 30,
+          "height": 17,
+          "rotated": true
+        },
+        {
+          "index": 11,
+          "x": 51,
+          "y": 0,
+          "width": 25,
+          "height": 18,
+          "rotated": true
+        },
+        {
+          "index": 15,
+          "x": 51,
+          "y": 18,
+          "width": 17,
+          "height": 15,
+          "rotated": true
+        },
+        {
+          "index": 16,
+          "x": 85,
+          "y": 9,
+          "width": 13,
+          "height": 19,
+          "rotated": true
+        },
+        {
+          "index": 17,
+          "x": 76,
+          "y": 0,
+          "width": 9,
+          "height": 26,
+          "rotated": true
+        },
+        {
+          "index": 19,
+          "x": 68,
+          "y": 18,
+          "width": 7,
+          "height": 19,
+          "rotated": true
+        },
+        {
+          "index": 20,
+          "x": 85,
+          "y": 0,
+          "width": 13,
+          "height": 9,
+          "rotated": true
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 3,
+          "x": 0,
+          "y": 30,
+          "width": 23,
+          "height": 32,
+          "rotated": true
+        },
+        {
+          "index": 4,
+          "x": 0,
+          "y": 5,
+          "width": 30,
+          "height": 23,
+          "rotated": true
+        },
+        {
+          "index": 5,
+          "x": 32,
+          "y": 0,
+          "width": 24,
+          "height": 25,
+          "rotated": true
+        },
+        {
+          "index": 10,
+          "x": 56,
+          "y": 0,
+          "width": 14,
+          "height": 33,
+          "rotated": false
+        },
+        {
+          "index": 18,
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 5,
+          "rotated": false
+        },
+        {
+          "index": 22,
+          "x": 70,
+          "y": 2,
+          "width": 3,
+          "height": 17,
+          "rotated": true
+        },
+        {
+          "index": 23,
+          "x": 84,
+          "y": 0,
+          "width": 15,
+          "height": 3,
+          "rotated": false
+        },
+        {
+          "index": 24,
+          "x": 0,
+          "y": 28,
+          "width": 22,
+          "height": 2,
+          "rotated": false
+        },
+        {
+          "index": 25,
+          "x": 70,
+          "y": 0,
+          "width": 14,
+          "height": 2,
+          "rotated": false
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 6,
+          "x": 12,
+          "y": 0,
+          "width": 21,
+          "height": 28,
+          "rotated": false
+        },
+        {
+          "index": 8,
+          "x": 84,
+          "y": 0,
+          "width": 15,
+          "height": 34,
+          "rotated": true
+        },
+        {
+          "index": 12,
+          "x": 0,
+          "y": 0,
+          "width": 12,
+          "height": 35,
+          "rotated": true
+        },
+        {
+          "index": 13,
+          "x": 37,
+          "y": 0,
+          "width": 34,
+          "height": 12,
+          "rotated": true
+        },
+        {
+          "index": 14,
+          "x": 71,
+          "y": 0,
+          "width": 13,
+          "height": 20,
+          "rotated": true
+        },
+        {
+          "index": 21,
+          "x": 33,
+          "y": 0,
+          "width": 4,
+          "height": 14,
+          "rotated": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "bin_width": 100,
+  "bin_height": 100,
+  "num_items": 25,
+  "bins_used": 7,
+  "unplaced": [],
+  "runtime_seconds": 0.150647228,
+  "bins": [
+    {
+      "items": [
+        {
+          "index": 8,
+          "x": 25,
+          "y": 0,
+          "width": 15,
+          "height": 34,
+          "rotated": true
+        },
+        {
+          "index": 11,
+          "x": 0,
+          "y": 0,
+          "width": 25,
+          "height": 18,
+          "rotated": true
+        },
+        {
+          "index": 12,
+          "x": 52,
+          "y": 17,
+          "width": 35,
+          "height": 12,
+          "rotated": false
+        },
+        {
+          "index": 13,
+          "x": 40,
+          "y": 0,
+          "width": 12,
+          "height": 34,
+          "rotated": false
+        },
+        {
+          "index": 15,
+          "x": 52,
+          "y": 0,
+          "width": 15,
+          "height": 17,
+          "rotated": false
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 1,
+          "x": 0,
+          "y": 0,
+          "width": 23,
+          "height": 33,
+          "rotated": true
+        },
+        {
+          "index": 7,
+          "x": 23,
+          "y": 0,
+          "width": 29,
+          "height": 19,
+          "rotated": true
+        },
+        {
+          "index": 9,
+          "x": 66,
+          "y": 0,
+          "width": 17,
+          "height": 30,
+          "rotated": false
+        },
+        {
+          "index": 10,
+          "x": 52,
+          "y": 0,
+          "width": 14,
+          "height": 33,
+          "rotated": false
+        },
+        {
+          "index": 21,
+          "x": 83,
+          "y": 0,
+          "width": 14,
+          "height": 4,
+          "rotated": true
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 4,
+          "x": 61,
+          "y": 0,
+          "width": 30,
+          "height": 23,
+          "rotated": true
+        },
+        {
+          "index": 6,
+          "x": 33,
+          "y": 0,
+          "width": 28,
+          "height": 21,
+          "rotated": true
+        },
+        {
+          "index": 14,
+          "x": 13,
+          "y": 0,
+          "width": 20,
+          "height": 13,
+          "rotated": false
+        },
+        {
+          "index": 16,
+          "x": 0,
+          "y": 0,
+          "width": 13,
+          "height": 19,
+          "rotated": true
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 19,
+          "x": 0,
+          "y": 0,
+          "width": 7,
+          "height": 19,
+          "rotated": true
+        },
+        {
+          "index": 23,
+          "x": 7,
+          "y": 0,
+          "width": 3,
+          "height": 15,
+          "rotated": true
+        },
+        {
+          "index": 24,
+          "x": 10,
+          "y": 0,
+          "width": 2,
+          "height": 22,
+          "rotated": true
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 3,
+          "x": 27,
+          "y": 0,
+          "width": 23,
+          "height": 32,
+          "rotated": true
+        },
+        {
+          "index": 5,
+          "x": 0,
+          "y": 0,
+          "width": 24,
+          "height": 25,
+          "rotated": true
+        },
+        {
+          "index": 22,
+          "x": 24,
+          "y": 0,
+          "width": 3,
+          "height": 17,
+          "rotated": true
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 17,
+          "x": 41,
+          "y": 0,
+          "width": 26,
+          "height": 9,
+          "rotated": false
+        },
+        {
+          "index": 18,
+          "x": 9,
+          "y": 0,
+          "width": 32,
+          "height": 5,
+          "rotated": false
+        },
+        {
+          "index": 20,
+          "x": 0,
+          "y": 0,
+          "width": 9,
+          "height": 13,
+          "rotated": false
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 0,
+          "x": 28,
+          "y": 0,
+          "width": 28,
+          "height": 33,
+          "rotated": true
+        },
+        {
+          "index": 2,
+          "x": 0,
+          "y": 0,
+          "width": 28,
+          "height": 27,
+          "rotated": true
+        }
+      ]
+    }
+  ]
+}

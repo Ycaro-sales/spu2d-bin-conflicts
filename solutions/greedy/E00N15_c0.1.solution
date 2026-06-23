@@ -4,16 +4,84 @@
   "num_items": 15,
   "bins_used": 3,
   "unplaced": [],
-  "runtime_seconds": 0.00001058,
+  "runtime_seconds": 0.000011345,
   "bins": [
     {
       "items": [
         {
-          "index": 4,
-          "x": 19,
+          "index": 0,
+          "x": 7,
+          "y": 3,
+          "width": 2,
+          "height": 6,
+          "rotated": false
+        },
+        {
+          "index": 1,
+          "x": 0,
+          "y": 3,
+          "width": 1,
+          "height": 17,
+          "rotated": false
+        },
+        {
+          "index": 2,
+          "x": 18,
           "y": 0,
+          "width": 2,
+          "height": 11,
+          "rotated": true
+        },
+        {
+          "index": 4,
+          "x": 6,
+          "y": 3,
           "width": 1,
           "height": 13,
+          "rotated": false
+        },
+        {
+          "index": 6,
+          "x": 9,
+          "y": 3,
+          "width": 1,
+          "height": 5,
+          "rotated": false
+        },
+        {
+          "index": 8,
+          "x": 11,
+          "y": 0,
+          "width": 7,
+          "height": 4,
+          "rotated": false
+        },
+        {
+          "index": 9,
+          "x": 0,
+          "y": 0,
+          "width": 11,
+          "height": 3,
+          "rotated": false
+        },
+        {
+          "index": 11,
+          "x": 1,
+          "y": 3,
+          "width": 5,
+          "height": 3,
+          "rotated": false
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 3,
+          "x": 8,
+          "y": 5,
+          "width": 4,
+          "height": 3,
           "rotated": false
         },
         {
@@ -23,14 +91,6 @@
           "width": 4,
           "height": 10,
           "rotated": true
-        },
-        {
-          "index": 6,
-          "x": 8,
-          "y": 5,
-          "width": 1,
-          "height": 5,
-          "rotated": false
         },
         {
           "index": 7,
@@ -69,68 +129,8 @@
     {
       "items": [
         {
-          "index": 0,
-          "x": 6,
-          "y": 3,
-          "width": 2,
-          "height": 6,
-          "rotated": false
-        },
-        {
-          "index": 1,
-          "x": 0,
-          "y": 3,
-          "width": 1,
-          "height": 17,
-          "rotated": false
-        },
-        {
-          "index": 2,
-          "x": 18,
-          "y": 0,
-          "width": 2,
-          "height": 11,
-          "rotated": true
-        },
-        {
-          "index": 8,
-          "x": 11,
-          "y": 0,
-          "width": 7,
-          "height": 4,
-          "rotated": false
-        },
-        {
-          "index": 9,
-          "x": 0,
-          "y": 0,
-          "width": 11,
-          "height": 3,
-          "rotated": false
-        },
-        {
-          "index": 11,
-          "x": 1,
-          "y": 3,
-          "width": 5,
-          "height": 3,
-          "rotated": false
-        }
-      ]
-    },
-    {
-      "items": [
-        {
-          "index": 3,
-          "x": 0,
-          "y": 0,
-          "width": 4,
-          "height": 3,
-          "rotated": false
-        },
-        {
           "index": 12,
-          "x": 4,
+          "x": 0,
           "y": 0,
           "width": 1,
           "height": 2,

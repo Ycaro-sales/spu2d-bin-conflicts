@@ -1,3 +1,4 @@
+#[derive(Clone, Debug)]
 pub struct Item {
     pub height: u32,
     pub width: u32,

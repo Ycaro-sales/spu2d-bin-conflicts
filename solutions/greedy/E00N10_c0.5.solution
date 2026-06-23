@@ -2,58 +2,10 @@
   "bin_width": 20,
   "bin_height": 20,
   "num_items": 10,
-  "bins_used": 5,
+  "bins_used": 4,
   "unplaced": [],
-  "runtime_seconds": 4.228e-6,
+  "runtime_seconds": 8.3e-6,
   "bins": [
-    {
-      "items": [
-        {
-          "index": 2,
-          "x": 4,
-          "y": 6,
-          "width": 5,
-          "height": 7,
-          "rotated": false
-        },
-        {
-          "index": 7,
-          "x": 17,
-          "y": 0,
-          "width": 1,
-          "height": 11,
-          "rotated": false
-        },
-        {
-          "index": 8,
-          "x": 0,
-          "y": 6,
-          "width": 4,
-          "height": 14,
-          "rotated": false
-        },
-        {
-          "index": 9,
-          "x": 0,
-          "y": 0,
-          "width": 17,
-          "height": 6,
-          "rotated": false
-        }
-      ]
-    },
-    {
-      "items": [
-        {
-          "index": 4,
-          "x": 0,
-          "y": 0,
-          "width": 7,
-          "height": 8,
-          "rotated": false
-        }
-      ]
-    },
     {
       "items": [
         {
@@ -85,11 +37,47 @@
     {
       "items": [
         {
-          "index": 6,
+          "index": 2,
+          "x": 7,
+          "y": 0,
+          "width": 5,
+          "height": 7,
+          "rotated": false
+        },
+        {
+          "index": 4,
           "x": 0,
+          "y": 0,
+          "width": 7,
+          "height": 8,
+          "rotated": false
+        },
+        {
+          "index": 7,
+          "x": 12,
+          "y": 0,
+          "width": 1,
+          "height": 11,
+          "rotated": false
+        }
+      ]
+    },
+    {
+      "items": [
+        {
+          "index": 6,
+          "x": 4,
           "y": 0,
           "width": 8,
           "height": 4,
+          "rotated": false
+        },
+        {
+          "index": 8,
+          "x": 0,
+          "y": 0,
+          "width": 4,
+          "height": 14,
           "rotated": false
         }
       ]
@@ -98,10 +86,18 @@
       "items": [
         {
           "index": 5,
-          "x": 0,
+          "x": 17,
           "y": 0,
           "width": 2,
           "height": 13,
+          "rotated": false
+        },
+        {
+          "index": 9,
+          "x": 0,
+          "y": 0,
+          "width": 17,
+          "height": 6,
           "rotated": false
         }
       ]

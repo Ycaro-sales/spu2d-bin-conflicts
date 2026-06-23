@@ -1,0 +1,12 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {section}{\numberline {1}Introdução}{3}{section.1}%
+\contentsline {section}{\numberline {2}Caracterização do problema}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}O problema do empacotamento bidimensional em faixa com restrições de descarregamento e de conflitos}{3}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Fundamentação teórica}{4}{section.3}%
+\contentsline {section}{\numberline {4}Metodologia}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Visão geral}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Representação da solução}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Heurística gulosa (\textit {First-Fit-Decreasing})}{5}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Metaheurística BRKGA}{6}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Resultados}{6}{section.5}%
+\contentsline {section}{\numberline {6}Conclusão}{7}{section.6}%

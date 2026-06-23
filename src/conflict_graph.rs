@@ -1,5 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
+#[derive(Clone, Debug)]
 pub struct ConflictGraph<T> {
     pub adjacency: HashMap<T, HashSet<T>>,
 }
