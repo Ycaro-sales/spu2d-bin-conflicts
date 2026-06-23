@@ -1,0 +1,278 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usetheme{Madrid}
+\usecolortheme{whale}
+\setbeamertemplate{navigation symbols}{}
+
+\title[Empacotamento 2D com Conflitos]{Empacotamento Bidimensional com Conflitos}
+\subtitle{Um \textit{solver} guloso e BRKGA para minimizar recipientes}
+\author{Ycaro Sales}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Roteiro}
+  \tableofcontents
+\end{frame}
+
+% ====================================================================
+\section{Introdução}
+
+\begin{frame}{A importância da logística no mundo atual}
+  \begin{itemize}
+    \item A logística é a espinha dorsal da economia moderna: transporte,
+          armazenamento e distribuição respondem por boa parte dos custos
+          operacionais de empresas.
+    \item O \textbf{e-commerce} multiplicou o volume de remessas e a pressão por
+          entregas rápidas e baratas.
+    \item Acomodar bem as mercadorias --- em caixas, paletes, contêineres e
+          caminhões --- é decisivo para a competitividade.
+  \end{itemize}
+  \vspace{0.5em}
+  \begin{block}{Por que minimizar recipientes?}
+    Cada contêiner, palete ou caixa economizada significa \textbf{menos
+    viagens}, \textbf{menos área de estoque}, \textbf{menos combustível} e
+    \textbf{menor impacto ambiental}. Otimizar o empacotamento gera ganho
+    econômico e sustentabilidade.
+  \end{block}
+\end{frame}
+
+% ====================================================================
+\section{Definição do problema}
+
+\begin{frame}{Empacotamento Bidimensional (2D Bin Packing) com Conflitos}
+  \textbf{Entrada:}
+  \begin{itemize}
+    \item Recipientes (faixas) retangulares de largura $W$ e altura $H$ fixas;
+    \item $n$ itens retangulares, cada um com largura $w_i$, altura $h_i$ e
+          classe de cliente $c_i$;
+    \item Um \textbf{grafo de conflitos} $G=(\Re, E)$.
+  \end{itemize}
+  \vspace{0.4em}
+  \textbf{Objetivo:} empacotar \emph{todos} os itens minimizando o número de
+  recipientes utilizados.
+  \vspace{0.4em}
+  \textbf{Restrições:}
+  \begin{itemize}
+    \item Sem sobreposição; item inteiramente dentro do recipiente;
+    \item Itens ligados por uma aresta em $G$ \textbf{não podem} dividir o mesmo
+          recipiente;
+    \item Permite-se rotação de $90^\circ$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{O que são ``conflitos''?}
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      Dois itens \emph{em conflito} não podem viajar no mesmo recipiente.
+      Exemplos reais:
+      \begin{itemize}
+        \item Produtos químicos incompatíveis;
+        \item Mercadorias de clientes ou rotas diferentes;
+        \item Itens que, por segurança/regulação, não podem ser transportados
+              juntos.
+      \end{itemize}
+      \vspace{0.5em}
+      O problema é \textbf{NP-difícil}: generaliza o \textit{Bin Packing} e se
+      relaciona à coloração de grafos (cada cor $\approx$ um recipiente).
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.9]
+        \node[circle,draw,fill=red!20] (a) at (0,2) {A};
+        \node[circle,draw,fill=blue!20] (b) at (2,2) {B};
+        \node[circle,draw,fill=green!20] (c) at (1,0) {C};
+        \draw[thick] (a) -- (b);
+        \draw[thick] (a) -- (c);
+        \node at (1,-1) {\small A--B e A--C em conflito};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ====================================================================
+\section{Representação do problema}
+
+\begin{frame}{Como o problema é modelado}
+  \begin{columns}
+    \begin{column}{0.56\textwidth}
+      Uma \textbf{instância} reúne todos os dados de entrada:
+      \begin{itemize}
+        \item \textbf{Faixa}: dimensões fixas $W \times H$;
+        \item \textbf{Itens}: lista de retângulos, cada um com largura $w_i$,
+              altura $h_i$ e classe de cliente $c_i$;
+        \item \textbf{Grafo de conflitos} $G$: indexado pela \emph{posição} de
+              cada item, com um nó por item e uma aresta por par incompatível.
+      \end{itemize}
+      \vspace{0.4em}
+      As instâncias são lidas de arquivos \texttt{JSON}; a demanda de cada tipo
+      de item é expandida em itens individuais.
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.8]
+        \draw[thick] (0,0) rectangle (3,3);
+        \node at (1.5,3.3) {\footnotesize faixa $W\times H$};
+        \fill[red!25,draw] (0,0) rectangle (1.2,1);
+        \node at (0.6,0.5) {\tiny $r_0$};
+        \fill[blue!25,draw] (1.2,0) rectangle (2,1.6);
+        \node at (1.6,0.8) {\tiny $r_1$};
+        \fill[green!25,draw] (0,1) rectangle (1,2.2);
+        \node at (0.5,1.6) {\tiny $r_2$};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Representação da solução}
+  Uma solução é o conjunto de \textbf{faixas}, cada uma com a posição (origem,
+  dimensões e orientação) dos itens nela alocados.
+  \begin{block}{Representação geométrica --- \texttt{Container} + EMS}
+    \begin{itemize}
+      \item Cada faixa mantém seus \textbf{Espaços Máximos Vazios} (retângulos
+            livres maximais) e as colocações já feitas;
+      \item Inserção pela regra \textbf{bottom-left} (menor origem em $y$, depois
+            em $x$), recortando os EMS interceptados;
+      \item Checagem de \textbf{conflito}: rejeita o item se um vizinho seu em
+            $G$ já está na faixa.
+    \end{itemize}
+  \end{block}
+  \begin{block}{Representação para a busca --- cromossomo BRKGA}
+    Vetor de $2n$ \textbf{chaves aleatórias} em $[0,1]$: as primeiras $n$
+    codificam a \emph{ordem de inserção} e as últimas $n$ a \emph{orientação} de
+    cada item (detalhado adiante).
+  \end{block}
+\end{frame}
+
+% ====================================================================
+\section{Heurísticas utilizadas}
+
+\begin{frame}{Heurística gulosa: First-Fit-Decreasing (linha de base)}
+  \begin{enumerate}
+    \item Ordena os itens por \textbf{área decrescente};
+    \item Insere cada item por \textbf{First-Fit} nas faixas abertas;
+    \item Abre uma nova faixa quando nenhuma aberta aceita o item.
+  \end{enumerate}
+  \vspace{0.5em}
+  \begin{block}{Detalhes geométricos}
+    \begin{itemize}
+      \item Inserção \textbf{ciente de conflitos} (rejeita item se um vizinho em
+            $G$ já está na faixa) e com \textbf{auto-rotação}.
+      \item Posicionamento via \textbf{Espaços Máximos Vazios} (EMS): o espaço
+            livre é um conjunto de retângulos vazios maximais, recortados a cada
+            inserção (regra \textit{bottom-left}).
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Metaheurística BRKGA}
+  \textbf{Biased Random-Key Genetic Algorithm}: cada solução é um vetor de
+  $2n$ chaves aleatórias em $[0,1]$.
+  \begin{itemize}
+    \item Primeiras $n$ chaves $\rightarrow$ \textbf{ordem de inserção}
+          (ordenação crescente);
+    \item Últimas $n$ chaves $\rightarrow$ \textbf{orientação}
+          ($\ge 0{,}5 \Rightarrow$ rotacionado).
+  \end{itemize}
+  Um \textbf{decodificador} determinístico empacota por First-Fit honrando os
+  conflitos. Aptidão a \emph{minimizar}:
+  \[
+    f = \texttt{faixas\_usadas} + \texttt{nao\_alocados}\times(n+1)
+  \]
+  A penalidade $(n+1)$ garante que toda solução inviável seja pior que qualquer
+  viável.
+  \vspace{0.4em}
+  \footnotesize Parâmetros: população $100$; parada com $200$ gerações
+  estagnadas; seleção por torneio; \textit{crossover} uniforme; mutação de gene
+  único.
+\end{frame}
+
+\begin{frame}{BRKGA: decodificação chaves $\rightarrow$ solução}
+  \centering
+  \footnotesize Exemplo com $n=3$ e chaves $[\,0.9,\ 0.1,\ 0.5\ |\ 0.2,\ 0.5,\ 0.8\,]$:
+  \vspace{0.6em}
+
+  \begin{tikzpicture}[node distance=0.4cm]
+    \node[draw,fill=blue!10] (ordem) {Ordem (1\textordmasculine\ metade): item1 $<$ item2 $<$ item0 $\Rightarrow$ [1, 2, 0]};
+    \node[draw,fill=green!10,below=of ordem] (orient) {Orientação (2\textordmasculine\ metade): item0=normal, item1=rotacionado, item2=rotacionado};
+    \node[draw,fill=orange!15,below=of orient] (pack) {First-Fit ciente de conflitos $\Rightarrow$ faixas com itens posicionados};
+    \draw[->,thick] (ordem) -- (orient);
+    \draw[->,thick] (orient) -- (pack);
+  \end{tikzpicture}
+  \vspace{0.6em}
+
+  \normalsize Apenas o decodificador conhece o problema; seleção, \textit{crossover}
+  e mutação operam genericamente sobre as chaves.
+\end{frame}
+
+% ====================================================================
+\section{Resultados}
+
+\begin{frame}{Resultados: gulosa vs. BRKGA (18 instâncias)}
+  \centering
+  \begin{tabular}{lrrr}
+    \toprule
+    Instância & $n$ & Gulosa & BRKGA \\
+    \midrule
+    CJCM-E02N20\_Hard\_c0.3           & 20 & 6 & \textbf{4} \\
+    CJCM-E00N23\_HardInfeasible\_c0.5 & 23 & 8 & \textbf{6} \\
+    CJCM-E03X18\_HardFeasible\_c0.1   & 18 & 3 & \textbf{2} \\
+    \midrule
+    \textbf{Total (18 instâncias)}    &    & \textbf{91} & \textbf{78} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.8em}
+  \begin{itemize}
+    \item BRKGA: \textbf{melhor em 11}, empate em 7, \textbf{nunca pior}.
+    \item Redução média de $\approx \mathbf{14{,}3\%}$ no número de faixas.
+    \item Tempos: gulosa $<0{,}01$\,s; BRKGA $\approx 0{,}07$--$0{,}13$\,s por
+          instância.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Efeito da densidade de conflitos}
+  \begin{itemize}
+    \item Os sufixos \texttt{c0.1}, \texttt{c0.3}, \texttt{c0.5} indicam a
+          probabilidade de conflito entre pares de itens.
+    \item Mais conflitos $\Rightarrow$ menos itens podem dividir um recipiente
+          $\Rightarrow$ \textbf{mais faixas necessárias}.
+    \item É justamente nos cenários mais restritos que o BRKGA mais se distancia
+          da heurística gulosa --- evidenciando o valor da busca metaheurística.
+  \end{itemize}
+\end{frame}
+
+% ====================================================================
+\section*{Conclusão}
+
+\begin{frame}{Conclusão e trabalhos futuros}
+  \begin{block}{Conclusão}
+    Combinando representação por chaves aleatórias (BRKGA), decodificador
+    First-Fit ciente de conflitos e gestão de espaços livres por EMS, obtivemos
+    soluções consistentemente melhores que a heurística gulosa, sem nunca
+    piorar nenhuma instância.
+  \end{block}
+  \begin{block}{Trabalhos futuros}
+    \begin{itemize}
+      \item Incorporar a restrição de \textbf{descarregamento} por classe de
+            cliente;
+      \item Avaliar sobre um conjunto maior de instâncias;
+      \item Ajuste sistemático dos parâmetros da metaheurística.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \centering \Huge Obrigado!\\[0.5em]
+  \normalsize Perguntas?
+\end{frame}
+
+\end{document}

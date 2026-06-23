@@ -1,0 +1,330 @@
+{
+  "Name": "E02N20",
+  "Objects": [
+    {
+      "Length": 20,
+      "Height": 20
+    }
+  ],
+  "Items": [
+    {
+      "Length": 7,
+      "Height": 9,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 12,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 1,
+      "Height": 18,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 1,
+      "Height": 20,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 3,
+      "Height": 20,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 9,
+      "Height": 7,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 10,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 1,
+      "Height": 6,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 5,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 1,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 4,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 4,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 1,
+      "Height": 6,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 2,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 5,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 4
+    }
+  ],
+  "NumClients": 7,
+  "Conflicts": [
+    [
+      0,
+      6
+    ],
+    [
+      0,
+      7
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      0,
+      16
+    ],
+    [
+      0,
+      18
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      18
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      2,
+      14
+    ],
+    [
+      2,
+      15
+    ],
+    [
+      2,
+      19
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      14
+    ],
+    [
+      3,
+      15
+    ],
+    [
+      4,
+      9
+    ],
+    [
+      4,
+      10
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      4,
+      14
+    ],
+    [
+      4,
+      15
+    ],
+    [
+      4,
+      16
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      10
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      5,
+      19
+    ],
+    [
+      6,
+      8
+    ],
+    [
+      6,
+      18
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      15
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      8,
+      10
+    ],
+    [
+      8,
+      15
+    ],
+    [
+      8,
+      16
+    ],
+    [
+      10,
+      14
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      12,
+      18
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      13,
+      18
+    ],
+    [
+      13,
+      19
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      15,
+      19
+    ],
+    [
+      18,
+      19
+    ]
+  ]
+}

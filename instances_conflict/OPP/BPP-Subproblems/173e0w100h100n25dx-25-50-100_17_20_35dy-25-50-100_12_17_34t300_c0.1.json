@@ -1,0 +1,316 @@
+{
+  "Name": "173e0w100h100n25dx-25-50-100_17_20_35dy-25-50-100_12_17_34t300",
+  "Objects": [
+    {
+      "Length": 100,
+      "Height": 100
+    }
+  ],
+  "Items": [
+    {
+      "Length": 33,
+      "Height": 28,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 33,
+      "Height": 23,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 27,
+      "Height": 28,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 32,
+      "Height": 23,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 23,
+      "Height": 30,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 25,
+      "Height": 24,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 21,
+      "Height": 28,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 19,
+      "Height": 29,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 34,
+      "Height": 15,
+      "Demand": 1,
+      "Client": 7
+    },
+    {
+      "Length": 17,
+      "Height": 30,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 14,
+      "Height": 33,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 18,
+      "Height": 25,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 35,
+      "Height": 12,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 12,
+      "Height": 34,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 20,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 15,
+      "Height": 17,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 19,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 26,
+      "Height": 9,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 32,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 19,
+      "Height": 7,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 9,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 4,
+      "Height": 14,
+      "Demand": 1,
+      "Client": 8
+    },
+    {
+      "Length": 17,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 15,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 22,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 4
+    }
+  ],
+  "NumClients": 9,
+  "Conflicts": [
+    [
+      0,
+      15
+    ],
+    [
+      0,
+      19
+    ],
+    [
+      0,
+      20
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      3,
+      10
+    ],
+    [
+      4,
+      10
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      5,
+      19
+    ],
+    [
+      6,
+      8
+    ],
+    [
+      6,
+      15
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      7,
+      23
+    ],
+    [
+      8,
+      20
+    ],
+    [
+      8,
+      22
+    ],
+    [
+      8,
+      23
+    ],
+    [
+      9,
+      19
+    ],
+    [
+      10,
+      12
+    ],
+    [
+      10,
+      20
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      11,
+      19
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      13,
+      20
+    ],
+    [
+      13,
+      22
+    ],
+    [
+      13,
+      24
+    ],
+    [
+      15,
+      19
+    ],
+    [
+      16,
+      19
+    ],
+    [
+      16,
+      24
+    ],
+    [
+      17,
+      21
+    ],
+    [
+      19,
+      24
+    ],
+    [
+      20,
+      23
+    ],
+    [
+      22,
+      23
+    ],
+    [
+      23,
+      24
+    ]
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "Name": "E10N15",
+  "Objects": [
+    {
+      "Length": 20,
+      "Height": 20
+    }
+  ],
+  "Items": [
+    {
+      "Length": 2,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 11,
+      "Height": 6,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 10,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 2,
+      "Height": 17,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 2,
+      "Height": 14,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 4,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 2,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 17,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 1,
+      "Height": 20,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 7,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 1,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 9,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 13,
+      "Demand": 1,
+      "Client": 0
+    }
+  ],
+  "NumClients": 5,
+  "Conflicts": [
+    [
+      0,
+      5
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      2,
+      10
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      6,
+      10
+    ],
+    [
+      6,
+      13
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      8,
+      11
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      10,
+      14
+    ],
+    [
+      12,
+      13
+    ]
+  ]
+}

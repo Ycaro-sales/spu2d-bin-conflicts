@@ -1,0 +1,168 @@
+{
+  "Name": "E07F15",
+  "Objects": [
+    {
+      "Length": 20,
+      "Height": 20
+    }
+  ],
+  "Items": [
+    {
+      "Length": 2,
+      "Height": 10,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 4,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 11,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 1,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 2,
+      "Height": 8,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 13,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 2,
+      "Height": 20,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 1,
+      "Height": 15,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 8,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 2,
+      "Height": 17,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 12,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 5,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 7,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 3,
+      "Height": 10,
+      "Demand": 1,
+      "Client": 3
+    }
+  ],
+  "NumClients": 5,
+  "Conflicts": [
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      11
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      2,
+      12
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      14
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      6,
+      10
+    ],
+    [
+      6,
+      12
+    ],
+    [
+      6,
+      14
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      10,
+      12
+    ]
+  ]
+}

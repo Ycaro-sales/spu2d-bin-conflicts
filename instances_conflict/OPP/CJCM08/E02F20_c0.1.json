@@ -1,0 +1,206 @@
+{
+  "Name": "E02F20",
+  "Objects": [
+    {
+      "Length": 20,
+      "Height": 20
+    }
+  ],
+  "Items": [
+    {
+      "Length": 1,
+      "Height": 15,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 2,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 3,
+      "Height": 15,
+      "Demand": 1,
+      "Client": 3
+    },
+    {
+      "Length": 8,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 7,
+      "Height": 8,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 6,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 2,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 4
+    },
+    {
+      "Length": 4,
+      "Height": 11,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 6,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 6
+    },
+    {
+      "Length": 3,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 1
+    },
+    {
+      "Length": 3,
+      "Height": 14,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 6,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 13,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 1,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 2
+    },
+    {
+      "Length": 1,
+      "Height": 7,
+      "Demand": 1,
+      "Client": 0
+    },
+    {
+      "Length": 1,
+      "Height": 3,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 2,
+      "Height": 4,
+      "Demand": 1,
+      "Client": 5
+    },
+    {
+      "Length": 4,
+      "Height": 2,
+      "Demand": 1,
+      "Client": 2
+    }
+  ],
+  "NumClients": 7,
+  "Conflicts": [
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      16
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      2,
+      19
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      8,
+      16
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      9,
+      16
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      16,
+      18
+    ],
+    [
+      16,
+      19
+    ]
+  ]
+}
