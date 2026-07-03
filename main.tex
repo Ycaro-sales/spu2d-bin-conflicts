@@ -1,5 +1,5 @@
 %! Tex root = main.tex
-\documentclass{article}
+\documentclass{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
@@ -9,6 +9,7 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\graphicspath{{figures/}{solutions/}}
 
 \title{SPU2D Bin Conflicts:\\ Empacotamento Bidimensional em Faixas com Restrições de Conflitos}
 \author{Ycaro Sales}
@@ -25,18 +26,20 @@ empacotar todos os itens retangulares no menor número possível de faixas de
 dimensões fixas, respeitando a ausência de sobreposição e o grafo de conflitos.
 Apresentamos uma formulação do problema, uma representação da solução baseada em
 chaves aleatórias e duas estratégias de resolução: uma heurística construtiva
-gulosa do tipo \textit{First-Fit-Decreasing} e uma metaheurística
-\textit{Biased Random-Key Genetic Algorithm} (BRKGA). Os experimentos sobre 18
-instâncias mostram que o BRKGA reduz o número total de faixas de 91 para 78
-(redução média de aproximadamente 14{,}3\%), superando a heurística gulosa em 11
-instâncias e empatando nas demais, sem nunca produzir resultado pior.
+gulosa que combina coloração do grafo de conflitos com
+\textit{First-Fit-Decreasing} por classe de cor, e uma metaheurística
+\textit{Biased Random-Key Genetic Algorithm} (BRKGA). Os experimentos sobre 60
+instâncias de três conjuntos de teste mostram que o BRKGA reduz o número total
+de faixas de 293 para 262 (redução média de aproximadamente 10{,}6\%),
+superando a heurística gulosa em 30 instâncias e empatando nas outras 30, sem
+nunca produzir resultado pior.
 \end{abstract}
 
 \newpage
 \tableofcontents
 \newpage
 
-\section{Introdução}
+\chapter{Introdução}
 
 A logística ocupa papel central na economia contemporânea: o transporte e o
 armazenamento de mercadorias representam parcela expressiva dos custos
@@ -62,14 +65,14 @@ O objetivo deste trabalho é minimizar o número de faixas (recipientes) utiliza
 para empacotar todos os itens de uma instância. Para isso, implementou-se em
 Rust um \textit{solver} que oferece duas abordagens: uma heurística construtiva
 gulosa, usada como linha de base, e uma metaheurística evolutiva (BRKGA),
-descritas na Seção~\ref{sec:metodologia}. As demais seções estão organizadas da
-seguinte forma: a Seção~\ref{sec:problema} caracteriza formalmente o problema; a
-Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica; a
-Seção~\ref{sec:metodologia} descreve a metodologia, incluindo a representação da
-solução e as heurísticas empregadas; e a Seção~\ref{sec:resultados} reporta os
-resultados experimentais.
+descritas no Capítulo~\ref{sec:metodologia}. Os demais capítulos estão
+organizados da seguinte forma: o Capítulo~\ref{sec:problema} caracteriza
+formalmente o problema; o Capítulo~\ref{sec:fundamentacao} apresenta a
+fundamentação teórica; o Capítulo~\ref{sec:metodologia} descreve a metodologia,
+incluindo a representação da solução e as heurísticas empregadas; e o
+Capítulo~\ref{sec:resultados} reporta os resultados experimentais.
 
-\section{Caracterização do problema}
+\chapter{Caracterização do problema}
 \label{sec:problema}
 
 \textbf{Entrada:} um conjunto de faixas (recipientes) retangulares de largura
@@ -94,7 +97,7 @@ minimizando o número de faixas utilizadas.
           mesma faixa.
 \end{itemize}
 
-\subsection{O problema do empacotamento bidimensional em faixa com restrições de descarregamento e de conflitos}
+\section{O problema do empacotamento bidimensional em faixa com restrições de descarregamento e de conflitos}
 
 O problema estudado é uma variante do empacotamento bidimensional em faixas
 (\textit{2D Strip/Bin Packing}). Na formulação clássica, busca-se posicionar
@@ -109,7 +112,7 @@ ao longo de uma rota. Neste trabalho, o foco recai sobre a restrição de
 conflitos e sobre a minimização do número de faixas; a classe de cliente é
 representada nos dados de entrada e fica disponível para extensões futuras.
 
-\section{Fundamentação teórica}
+\chapter{Fundamentação teórica}
 \label{sec:fundamentacao}
 
 O empacotamento bidimensional pertence à família de problemas de corte e
@@ -120,7 +123,14 @@ a recipientes respeitando os conflitos equivaleria a colorir $G$ com o menor
 número de cores, em que cada cor representa um recipiente. Assim, o número
 cromático de $G$ é um limitante inferior para o número de faixas necessárias,
 pois itens mutuamente em conflito (uma clique em $G$) exigem recipientes
-distintos.
+distintos. Essa conexão não é apenas um limitante teórico: ela pode ser
+explorada de forma \emph{construtiva}. Ao colorir $G$, cada classe de cor é um
+conjunto independente --- portanto \emph{livre de conflitos} --- e pode ser
+empacotada isoladamente, eliminando a restrição de conflitos por construção.
+Uma heurística clássica de coloração é a \emph{coloração gulosa} em ordem de
+Welsh--Powell~\cite{welsh1967}: os vértices são processados por grau
+decrescente e cada um recebe a menor cor não usada por seus vizinhos já
+coloridos, o que tende a produzir poucas cores a baixo custo computacional.
 
 Como o problema é intratável na prática para instâncias de tamanho realista,
 recorre-se a métodos aproximados. As \emph{heurísticas construtivas} produzem
@@ -148,10 +158,10 @@ retângulos vazios maximais; ao inserir um item, os espaços que ele intercepta
 são recortados em novos retângulos e os espaços contidos em outros são
 descartados, mantendo apenas os maximais.
 
-\section{Metodologia}
+\chapter{Metodologia}
 \label{sec:metodologia}
 
-\subsection{Visão geral}
+\section{Visão geral}
 
 O \textit{solver} foi implementado em Rust. Cada instância é lida de um arquivo
 JSON (formatos \texttt{Objects/Items} e \texttt{Container/ItemTypes}),
@@ -161,7 +171,7 @@ são executadas duas estratégias --- a heurística gulosa e o BRKGA --- e as
 soluções resultantes são serializadas em JSON, registrando o número de faixas
 utilizadas, os itens não alocados, o tempo de execução e a posição de cada item.
 
-\subsection{Representação da solução}
+\section{Representação da solução}
 
 A solução de uma instância é o conjunto de faixas, cada uma contendo as
 posições (origem, dimensões e orientação) dos itens nela alocados. O componente
@@ -186,38 +196,54 @@ O decodificador percorre os itens na ordem dada e os insere por
 das abertas aceita o item; um item que não cabe nem em uma faixa vazia na sua
 orientação forçada é marcado como não alocado.
 
-\subsection{Heurística gulosa (\textit{First-Fit-Decreasing})}
+\section{Heurística gulosa (coloração + \textit{First-Fit-Decreasing})}
 
-A heurística gulosa serve de linha de base. Os itens são ordenados por área
-decrescente e inseridos, um a um, por \textit{First-Fit} nas faixas abertas;
-quando nenhuma faixa aberta aceita o item, abre-se uma nova faixa. A inserção é
-\emph{ciente de conflitos} e tenta automaticamente as duas orientações do item.
-O Algoritmo~\ref{alg:ffd} resume o procedimento.
+A heurística gulosa serve de linha de base e combina coloração do grafo de
+conflitos com empacotamento \textit{First-Fit-Decreasing}. Primeiro, $G$ é
+colorido por um algoritmo guloso em ordem de Welsh--Powell (grau decrescente,
+com desempate determinístico): itens em conflito recebem cores diferentes, de
+modo que cada \emph{classe de cor é um conjunto livre de conflitos}. Em
+seguida, os itens são agrupados por cor e cada grupo é empacotado
+separadamente: os itens da cor são ordenados por área decrescente e inseridos
+por \textit{First-Fit} em \emph{faixas dedicadas àquela cor}, abrindo-se uma
+nova faixa da mesma cor quando nenhuma das abertas aceita o item.
+
+Como as faixas nunca misturam cores, os conflitos tornam-se impossíveis
+\emph{por construção}, sem depender da checagem de vizinhança a cada inserção.
+A geometria permanece a mesma do restante do \textit{solver}: gerenciamento de
+espaços livres por EMS, regra \textit{bottom-left} e tentativa automática das
+duas orientações do item. O Algoritmo~\ref{alg:ffd} resume o procedimento.
 
 \begin{algorithm}[h]
-\caption{Heurística gulosa First-Fit-Decreasing}
+\caption{Heurística gulosa: coloração + First-Fit-Decreasing por cor}
 \label{alg:ffd}
 \KwIn{instância com itens $\Re$, faixa $W \times H$, grafo $G$}
 \KwOut{conjunto de faixas $B$}
 $B \leftarrow \emptyset$\;
-ordene $\Re$ por área decrescente\;
-\ForEach{item $r \in \Re$}{
-    $alocado \leftarrow falso$\;
-    \ForEach{faixa $b \in B$}{
-        \If{$b$ aceita $r$ (sem conflito e com espaço)}{
-            insira $r$ em $b$ (regra bottom-left, auto-rotação)\;
-            $alocado \leftarrow verdadeiro$; \textbf{break}\;
+colora $G$ gulosamente em ordem de Welsh--Powell (grau decrescente)\;
+agrupe os itens por cor\;
+\ForEach{classe de cor $C$}{
+    $B_C \leftarrow \emptyset$ \tcp*{faixas dedicadas à cor $C$}
+    ordene os itens de $C$ por área decrescente\;
+    \ForEach{item $r \in C$}{
+        $alocado \leftarrow falso$\;
+        \ForEach{faixa $b \in B_C$}{
+            \If{$b$ tem espaço para $r$}{
+                insira $r$ em $b$ (regra bottom-left, auto-rotação)\;
+                $alocado \leftarrow verdadeiro$; \textbf{break}\;
+            }
+        }
+        \If{$\neg alocado$}{
+            abra nova faixa $b'$ e insira $r$ em $b'$\;
+            $B_C \leftarrow B_C \cup \{b'\}$\;
         }
     }
-    \If{$\neg alocado$}{
-        abra nova faixa $b'$ e insira $r$ em $b'$\;
-        $B \leftarrow B \cup \{b'\}$\;
-    }
+    $B \leftarrow B \cup B_C$\;
 }
 \Return $B$\;
 \end{algorithm}
 
-\subsection{Metaheurística BRKGA}
+\section{Metaheurística BRKGA}
 
 A metaheurística evolui uma população de vetores de chaves aleatórias. A
 \emph{função de aptidão} (\textit{fitness}) de um cromossomo é obtida
@@ -249,68 +275,125 @@ inicialize população de $P$ vetores de $2n$ chaves em $[0,1]$\;
 \Return decodificação do melhor cromossomo\;
 \end{algorithm}
 
-\section{Resultados}
+\chapter{Resultados}
 \label{sec:resultados}
 
-As duas estratégias foram avaliadas sobre 18 instâncias derivadas de conjuntos
-de teste de empacotamento bidimensional, às quais foram adicionados conflitos
-com diferentes densidades (sufixos \texttt{c0.1}, \texttt{c0.3} e \texttt{c0.5},
-indicando a probabilidade de conflito entre pares de itens). A
-Tabela~\ref{tab:resultados} compara o número de faixas utilizadas pela
-heurística gulosa e pelo BRKGA.
+As duas estratégias foram avaliadas sobre 60 instâncias amostradas de três
+conjuntos de teste de empacotamento bidimensional (\textit{CJCM08},
+\textit{BPP-Subproblems} e \textit{InterestingInstances}), com $n$ variando de
+10 a 27 itens. A cada instância original foram adicionados conflitos com três
+densidades distintas (sufixos \texttt{c0.1}, \texttt{c0.3} e \texttt{c0.5},
+indicando a probabilidade de conflito entre pares de itens; 20 instâncias por
+densidade). Em todas as 60 instâncias, ambas as estratégias alocaram todos os
+itens. A Tabela~\ref{tab:resultados} compara o número de faixas utilizadas pela
+heurística gulosa e pelo BRKGA em uma amostra representativa, junto com o total
+sobre o conjunto completo.
 
 \begin{table}[h]
 \centering
-\caption{Número de faixas utilizadas: gulosa vs. BRKGA.}
+\caption{Número de faixas utilizadas: gulosa vs. BRKGA (amostra representativa e total).}
 \label{tab:resultados}
 \begin{tabular}{lrrr}
 \toprule
 Instância & $n$ & Gulosa & BRKGA \\
 \midrule
-BPPSP-n100m18b2d2\_Hard\_c0.1      & 18 & 3 & 3 \\
+E00N15\_c0.3                       & 15 & 4 & 3 \\
+BPPSP-n100m18b2d2\_Hard\_c0.1      & 18 & 4 & 3 \\
 BPPSP-n100m18b2d2\_Hard\_c0.5      & 18 & 6 & 5 \\
-CJCM-E00N23\_HardInfeasible\_c0.3  & 23 & 6 & 5 \\
-CJCM-E00N23\_HardInfeasible\_c0.5  & 23 & 8 & 6 \\
-CJCM-E02F20\_ManyCalls\_c0.3       & 20 & 5 & 4 \\
-CJCM-E02N20\_Hard\_c0.3            & 20 & 6 & 4 \\
-CJCM-E02N20\_Hard\_c0.5            & 20 & 7 & 6 \\
 CJCM-E03X18\_HardFeasible\_c0.1    & 18 & 3 & 2 \\
-CJCM-E03X18\_HardFeasible\_c0.5    & 18 & 7 & 6 \\
+CJCM-E03X18\_HardFeasible\_c0.3    & 18 & 4 & 4 \\
+CJCM-E02F20\_ManyCalls\_c0.5       & 20 & 7 & 6 \\
+CJCM-E02N20\_Hard\_c0.5            & 20 & 6 & 6 \\
+E00N23\_c0.3                       & 23 & 5 & 4 \\
+CJCM-E00N23\_HardInfeasible\_c0.5  & 23 & 7 & 6 \\
+BPP n24\_c0.5                      & 24 & 7 & 6 \\
+BPP n26\_c0.5                      & 26 & 8 & 6 \\
+BPP n27\_c0.1                      & 27 & 4 & 3 \\
 \midrule
-\textbf{Total (18 instâncias)}     &    & \textbf{91} & \textbf{78} \\
+\textbf{Total (60 instâncias)}     &    & \textbf{293} & \textbf{262} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Considerando o conjunto completo de 18 instâncias, a heurística gulosa utilizou
-91 faixas no total, enquanto o BRKGA utilizou 78 --- uma redução média de
-aproximadamente $14{,}3\%$. O BRKGA produziu soluções estritamente melhores em
-11 instâncias, empatou em 7 e em nenhum caso foi pior do que a gulosa. Quanto ao
-tempo de execução, a heurística gulosa é praticamente instantânea
-($<0{,}01$\,s por instância), ao passo que o BRKGA, por seu caráter iterativo,
-gasta tipicamente entre $0{,}07$\,s e $0{,}13$\,s por instância --- um custo
-ainda baixo, compatível com seu ganho de qualidade.
+Considerando o conjunto completo de 60 instâncias, a heurística gulosa utilizou
+293 faixas no total, enquanto o BRKGA utilizou 262 --- 31 faixas economizadas,
+uma redução média de aproximadamente $10{,}6\%$. O BRKGA produziu soluções
+estritamente melhores em 30 instâncias, empatou nas outras 30 e em nenhum caso
+foi pior do que a gulosa. Quanto ao tempo de execução, a heurística gulosa é
+praticamente instantânea ($<0{,}001$\,s por instância), ao passo que o BRKGA,
+por seu caráter iterativo, gasta em média cerca de $0{,}10$\,s por instância
+(máximo de $0{,}18$\,s) --- um custo ainda baixo, compatível com seu ganho de
+qualidade. A Figura~\ref{fig:qualidade} resume a comparação de qualidade sobre
+todas as instâncias.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{comparison_quality.png}
+\caption{Qualidade das soluções: faixas usadas pela gulosa vs. BRKGA. Cada
+ponto é uma instância; abaixo da reta $y=x$, o BRKGA usa menos faixas. À
+direita, a distribuição de faixas economizadas.}
+\label{fig:qualidade}
+\end{figure}
 
 Observa-se também que o aumento da densidade de conflitos (de \texttt{c0.1} para
 \texttt{c0.5}) eleva consistentemente o número de faixas necessárias, o que é
 esperado: quanto mais arestas no grafo de conflitos, menos itens podem
-compartilhar um mesmo recipiente. Nesses cenários mais restritos é justamente
-onde o BRKGA mais se distancia da heurística gulosa, evidenciando o valor da
-busca metaheurística quando as restrições de conflito se intensificam.
+compartilhar um mesmo recipiente. A Tabela~\ref{tab:densidade} agrega os
+resultados por densidade: nos cenários mais restritos (\texttt{c0.5}) é
+justamente onde o BRKGA mais se distancia da heurística gulosa, evidenciando o
+valor da busca metaheurística quando as restrições de conflito se intensificam.
 
-\section{Conclusão}
+\begin{table}[h]
+\centering
+\caption{Faixas utilizadas por densidade de conflitos (soma sobre 20 instâncias por densidade).}
+\label{tab:densidade}
+\begin{tabular}{lrrr}
+\toprule
+Densidade & Gulosa & BRKGA & Economia \\
+\midrule
+\texttt{c0.1} & 64  & 58  & 6  \\
+\texttt{c0.3} & 93  & 85  & 8  \\
+\texttt{c0.5} & 136 & 119 & \textbf{17} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Figura~\ref{fig:exemplo} ilustra a diferença entre as duas estratégias na
+instância \texttt{E00N15\_c0.3} (15 itens, 35 conflitos): sobre o mesmo grafo
+de conflitos, a gulosa usa 4 faixas e o BRKGA encontra um empacotamento com 3.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sample_greedy.png}\\
+  \small Gulosa: 4 faixas
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sample_brkga.png}\\
+  \small BRKGA: 3 faixas
+\end{minipage}
+\caption{Soluções da instância \texttt{E00N15\_c0.3}: gulosa (esquerda) vs.
+BRKGA (direita).}
+\label{fig:exemplo}
+\end{figure}
+
+\chapter{Conclusão}
 
 Este trabalho apresentou uma formulação e duas estratégias de resolução para o
 empacotamento bidimensional em faixas com restrições de conflitos. A
 representação por chaves aleatórias do BRKGA, combinada a um decodificador
 \textit{First-Fit} ciente de conflitos e ao gerenciamento de espaços livres via
-EMS, mostrou-se eficaz: o BRKGA reduziu o número total de faixas em relação à
-heurística gulosa sem nunca piorar nenhuma instância. Como trabalhos futuros,
-destacam-se a incorporação efetiva da restrição de descarregamento por classe de
-cliente, a avaliação sobre um conjunto maior de instâncias e o ajuste sistemático
+EMS, mostrou-se eficaz mesmo frente a uma linha de base fortalecida pela
+coloração do grafo de conflitos: sobre 60 instâncias de três conjuntos de
+teste, o BRKGA venceu em 30, empatou em 30 e não perdeu em nenhuma,
+economizando 31 faixas no total. Como trabalhos futuros, destacam-se a
+incorporação efetiva da restrição de descarregamento por classe de cliente, a
+ampliação da avaliação para todo o acervo de instâncias e o ajuste sistemático
 dos parâmetros da metaheurística.
 
-\section*{Referências Bibliográficas}
+\chapter*{Referências Bibliográficas}
 
 \begin{thebibliography}{9}
 \bibitem{goncalves2011} Gonçalves, J. F.; Resende, M. G. C. (2011).
@@ -324,6 +407,10 @@ Operational Research, 141(2), 241--252.
 \bibitem{wascher2007} Wäscher, G.; Haußner, H.; Schumann, H. (2007).
 \textit{An improved typology of cutting and packing problems}. European Journal
 of Operational Research, 183(3), 1109--1130.
+
+\bibitem{welsh1967} Welsh, D. J. A.; Powell, M. B. (1967).
+\textit{An upper bound for the chromatic number of a graph and its application
+to timetabling problems}. The Computer Journal, 10(1), 85--86.
 \end{thebibliography}
 
 \end{document}
